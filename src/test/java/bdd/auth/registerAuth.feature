@@ -1,0 +1,23 @@
+Feature: Registro de usuario
+
+  Background:
+
+    Given url "https://api.qateamperu.com"
+
+  Scenario: CP01-Registro de usuario Exitoso
+    * def data =
+    """
+    {
+    "email": "Test04qateam@gmail.com",
+    "password": "12345678",
+    "nombre": "Analista 04-QA",
+    "tipo_usuario_id": 1,
+    "estado": 1
+}
+    """
+    And path "/api/register"
+    And request data
+    When method post
+    Then status 200
+
+  Scenario: CP02-Usuario existente
