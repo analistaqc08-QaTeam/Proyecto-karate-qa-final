@@ -1,0 +1,11 @@
+{
+  "bodyRegisterUsuarioOK":
+  {
+    "email": "#(email)",
+    "password": "#(password)",
+    "nombre": "#(nombre)",
+    "tipo_usuario_id": "#(tipo_usuario_id)",
+    "estado": "#(estado)"
+  }
+
+}

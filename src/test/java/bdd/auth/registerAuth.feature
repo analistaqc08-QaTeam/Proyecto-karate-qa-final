@@ -8,9 +8,9 @@ Feature: Registro de usuario
     * def data =
     """
     {
-    "email": "Test04qateam@gmail.com",
+    "email": "Test05qateam@gmail.com",
     "password": "12345678",
-    "nombre": "Analista 04-QA",
+    "nombre": "Analista 05-QA",
     "tipo_usuario_id": 1,
     "estado": 1
 }
@@ -21,3 +21,19 @@ Feature: Registro de usuario
     Then status 200
 
   Scenario: CP02-Usuario existente
+    * def data =
+    """
+    {
+    "email": "Test04qateam@gmail.com",
+    "password": "12345678",
+    "nombre": "Analista 04-QA",
+    "tipo_usuario_id": 1,
+    "estado": 1
+}
+    """
+    And path "/api/register"
+    And request data
+    When method post
+    Then status 500
+    * print response
+    And match response.email contains 'The email has already been taken.'
