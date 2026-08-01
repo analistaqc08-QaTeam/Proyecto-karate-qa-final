@@ -2,7 +2,7 @@ Feature: Registro de usuario
 
   Background:
 
-    Given url "https://api.qateamperu.com"
+    Given url urlBase
 
   Scenario: CP01-Registro de usuario Exitoso
     * def data =
