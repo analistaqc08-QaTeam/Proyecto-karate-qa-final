@@ -35,5 +35,4 @@ Feature: Registro de usuario
     And request data
     When method post
     Then status 500
-    * print response
     And match response.email contains 'The email has already been taken.'
