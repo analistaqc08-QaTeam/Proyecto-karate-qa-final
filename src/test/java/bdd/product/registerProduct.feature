@@ -34,6 +34,20 @@ Feature: Registro de producto
     * print idproducto
 
 
+  Scenario Outline: CP02-Registro de producto desde un archivo CSV
+    Given path "/api/v1/producto"
+    And header Authorization = tokenAuth
+    And request { codigo: '#(codigo)', nombre: '#(nombre)', medida: '#(medida)', marca: '#(marca)', categoria: '#(categoria)', precio: '#(precio)', stock: '#(stock)', estado: '#(estado)', descripcion: '#(descripcion)' }
+    * print codigo
+    * print nombre
+    When method post
+    Then status 200
+    And match response contains {"nombre": "Laptop HP"}
+
+    Examples:
+      | read('classpath:resources/csv/auth/dataProducts.csv') |
+
+
   Scenario: CP02-Registro de producto con codigo existente
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth
