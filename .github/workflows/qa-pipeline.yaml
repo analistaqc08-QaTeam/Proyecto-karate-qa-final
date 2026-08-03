@@ -7,24 +7,25 @@ on:
         description: 'Tag del Proyecto'
         required: true
         default: '@automation-api'
+        type: string
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar Repositorio
+      - name: Clonar repositorio
         uses: actions/checkout@v4
 
-      - name: Instalacion de Java 17
-        uses: actions/setup-java@v6
+      - name: Configurar Java
+        uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
-          cache: 'maven'
+          cache: maven
 
-      - name: Ejecutar Pruebas
-        run: mvn clean test -Dkarate.options="--tags ${{ github.event.inputs.tags }}"
+      - name: Ejecutar pruebas
+        run: mvn test -Dkarate.options="--tags ${{ github.event.inputs.tags }}"
 
       - name: Publicar reporte
         if: always()
