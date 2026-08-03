@@ -1,12 +1,14 @@
-name: Poryecto RegistrarProducto Pipeline
+name: Proyecto Final Pipeline
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+    - main
 
-    jobs:
+  jobs:
       build:
         runs-on: ubuntu-22.04
 
         steps:
-          - name: Prueba inicial
+          - name: Proyecto Final
             run: echo "workflow para el proyecto final"
