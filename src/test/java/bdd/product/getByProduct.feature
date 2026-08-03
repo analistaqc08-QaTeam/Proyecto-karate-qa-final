@@ -13,7 +13,7 @@ Feature: Obtener producto
     * print tokenAuth
     * print idproducto
 
-
+  @automation-api
   Scenario: CP01-Obtener listado de producto por ID
     * print tokenAuth
     Given path "/api/v1/producto/" + idproducto
@@ -30,10 +30,10 @@ Feature: Obtener producto
          categoria: 'Repuestos'
       }
       """
-
+  @automation-api
   Scenario: CP02-Obtener listado de producto por ID errado
     Given path "/api/v1/producto/"
-    And header Authorization = tokenAuth
+    And header Authorization = "uJxAHeBosEHudNtz5Git544qiPLkayt1Y"
     When method get
     Then status 404
     And match response.error contains 'Producto no encontrado'

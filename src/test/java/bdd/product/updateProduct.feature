@@ -11,7 +11,7 @@ Feature: Actualizar producto
     Given url  urlBase
     * def tokenAuth = 'Bearer '+ token
 
-
+  @automation-api
   Scenario: CP01-Actualizar producto Exitoso
 
     Given path "/api/v1/producto/" + idproducto
@@ -36,11 +36,11 @@ Feature: Actualizar producto
     And match response contains {"nombre": "Laptop HP"}
 
 
-
+  @automation-api
   Scenario: CP02-Actualizar producto sin enviar valor del token
 
     Given path "/api/v1/producto/" + idproducto
-    And header Authorization = tokenAuth + "3502|FHm1"
+    And header Authorization = "xx"
 
     And request
      """

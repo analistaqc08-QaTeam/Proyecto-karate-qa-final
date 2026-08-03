@@ -6,8 +6,9 @@ Feature: Registro de producto
     * def tokenAuth = 'Bearer '+ token
     * def random = new java.util.Random().nextInt(90) + 10
     * def codigo = 'CP0A' + random
+    * def codigo1 = 'CPBA' + random
 
-  @RegistroProducto
+  @RegistroProducto @automation-api
   Scenario: CP01-Registro de producto Exitoso
 
     * print tokenAuth
@@ -33,11 +34,11 @@ Feature: Registro de producto
     * def idproducto = response.id
     * print idproducto
 
-
+  @automation-api
   Scenario Outline: CP02-Registro de producto desde un archivo CSV
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth
-    And request { codigo: '#(codigo)', nombre: '#(nombre)', medida: '#(medida)', marca: '#(marca)', categoria: '#(categoria)', precio: '#(precio)', stock: '#(stock)', estado: '#(estado)', descripcion: '#(descripcion)' }
+    And request { codigo: '#(codigo1)', nombre: '#(nombre)', medida: '#(medida)', marca: '#(marca)', categoria: '#(categoria)', precio: '#(precio)', stock: '#(stock)', estado: '#(estado)', descripcion: '#(descripcion)' }
     * print codigo
     * print nombre
     When method post
@@ -47,7 +48,7 @@ Feature: Registro de producto
     Examples:
       | read('classpath:resources/csv/auth/dataProducts.csv') |
 
-
+  @automation-api
   Scenario: CP03-Registro de producto con codigo existente
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth
@@ -68,6 +69,7 @@ Feature: Registro de producto
     When method post
     Then status 500
 
+  @automation-api
   Scenario: CP04-Registro de producto sin nombre
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth
@@ -90,10 +92,10 @@ Feature: Registro de producto
     And match response.nombre contains 'The nombre field is required.'
 
 
-
+  @automation-api
   Scenario Outline: CP06-Registro de producto con token invalido
     Given path "/api/v1/producto"
-    And header Authorization = tokenAuth + "error"
+    And header Authorization = "uJxAHeBosEHudNtz5Git544qiPLkayt1Y"
     And request { codigo: '#(codigo)', nombre: '#(nombre)', medida: '#(medida)', marca: '#(marca)', categoria: '#(categoria)', precio: '#(precio)', stock: '#(stock)', estado: '#(estado)', descripcion: '#(descripcion)' }
     When method post
     Then status 200
@@ -102,7 +104,7 @@ Feature: Registro de producto
     Examples:
       | read('classpath:resources/csv/auth/dataProducts.csv') |
 
-
+  @automation-api
   Scenario: CP07-Registro de producto fallido con validacion de campo
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth

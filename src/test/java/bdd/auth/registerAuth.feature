@@ -4,6 +4,7 @@ Feature: Registro de usuario
 
     Given url urlBase
 
+  @automation-api
   Scenario: CP01-Registro de usuario Exitoso
     * def data =
     """
@@ -20,6 +21,7 @@ Feature: Registro de usuario
     When method post
     Then status 200
 
+  @automation-api
   Scenario: CP02-Usuario existente
     * def data =
     """

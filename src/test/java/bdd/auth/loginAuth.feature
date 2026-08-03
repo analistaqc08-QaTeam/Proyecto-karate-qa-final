@@ -4,7 +4,7 @@ Feature: Ingreso de usuario
 
     Given url  urlBase
 
-  @login
+  @login @automation-api
   Scenario: CP01-Inicio de session exitoso
     * def data =
     """
@@ -20,6 +20,7 @@ Feature: Ingreso de usuario
     * def token = response.access_token
     * print token
 
+  @automation-api
   Scenario: CP02-login Fallido
     * def data =
     """
