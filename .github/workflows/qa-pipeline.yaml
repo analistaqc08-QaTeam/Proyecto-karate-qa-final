@@ -5,10 +5,10 @@ on:
     branches:
     - main
 
-  jobs:
-      build:
-        runs-on: ubuntu-22.04
+jobs:
+  build:
+    runs-on: ubuntu-22.04
 
-        steps:
-          - name: Proyecto Final
-            run: echo "workflow para el proyecto final"
+    steps:
+      - name: Proyecto final
+        run: echo "workflow proyecto Resgitro Producto"
