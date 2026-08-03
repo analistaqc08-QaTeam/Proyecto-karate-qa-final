@@ -48,7 +48,7 @@ Feature: Registro de producto
       | read('classpath:resources/csv/auth/dataProducts.csv') |
 
 
-  Scenario: CP02-Registro de producto con codigo existente
+  Scenario: CP03-Registro de producto con codigo existente
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth
     And request
@@ -68,7 +68,7 @@ Feature: Registro de producto
     When method post
     Then status 500
 
-  Scenario: CP03-Registro de producto fallido
+  Scenario: CP04-Registro de producto sin nombre
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth
     And request
@@ -89,29 +89,21 @@ Feature: Registro de producto
     Then status 500
     And match response.nombre contains 'The nombre field is required.'
 
-  Scenario: CP04-Registro de producto con token invalido
+
+
+  Scenario Outline: CP06-Registro de producto con token invalido
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth + "error"
-    And request
-     """
-  {
-    "codigo": "CP0A05",
-    "nombre": "Laptop HP",
-    "medida": "UND ",
-    "marca": "Generico",
-    "categoria": "Repuestos",
-    "precio": "precio",
-    "stock": "48",
-    "estado": "3",
-    "descripcion": "Ploma 14 pulgadas"
-}
-    """
+    And request { codigo: '#(codigo)', nombre: '#(nombre)', medida: '#(medida)', marca: '#(marca)', categoria: '#(categoria)', precio: '#(precio)', stock: '#(stock)', estado: '#(estado)', descripcion: '#(descripcion)' }
     When method post
-    Then status 500
-    And match response.message contains 'Unauthenticated.'
+    Then status 200
+    And match response contains {"nombre": "Laptop HP"}
+
+    Examples:
+      | read('classpath:resources/csv/auth/dataProducts.csv') |
 
 
-  Scenario: CP05-Registro de producto fallido con validacion de campo
+  Scenario: CP07-Registro de producto fallido con validacion de campo
     Given path "/api/v1/producto"
     And header Authorization = tokenAuth
     And request
