@@ -9,4 +9,4 @@ jobs:
 
     steps:
       - name: Proyecto final
-        run: echo "workflow proyecto Resgitro Producto"
+        run: echo "workflow proyecto"
