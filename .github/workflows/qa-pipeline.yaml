@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tags:
-        description:  'Tag del Proyecto'
+        description: 'Tag del Proyecto'
         required: true
         default: '@automation-api'
 
@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Proyecto final
-        run: echo "workflow proyecto"
+      - name: Clonar Repositorio
+        uses: actions/checkout@v4
 
       - name: Instalacion de Java 17
         uses: actions/setup-java@v6
@@ -23,13 +23,10 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: Clonar Repositorio
-        uses: actions/checkout@v4
-
       - name: Ejecutar Pruebas
-        uses: mvn clean test -Dkarate.tags=${{ inputs.tags }}
+        run: mvn clean test -Dkarate.options="--tags ${{ github.event.inputs.tags }}"
 
-      - name: Visualizar reporte
+      - name: Publicar reporte
         if: always()
         uses: actions/upload-artifact@v4
         with:
